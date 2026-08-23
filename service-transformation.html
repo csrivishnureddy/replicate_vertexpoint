@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Digital Transformation | Vertex Point</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #111111; --accent: #111111; --white: #ffffff;
+      --light-bg: #f5f5f5; --gray: #666666; --light-gray: #e8e8e8;
+      --text: #111111; --border: #dddddd;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+    .topbar { background: #111; color: rgba(255,255,255,0.8); font-size: 13px; padding: 8px 0; }
+    .topbar-inner { max-width:1200px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+    .topbar a { color:rgba(255,255,255,0.8); text-decoration:none; }
+    .topbar a:hover { color:#fff; }
+    .topbar-left,.topbar-right { display:flex; align-items:center; gap:20px; }
+    .topbar-item { display:flex; align-items:center; gap:6px; }
+    .topbar-item svg { width:14px; height:14px; flex-shrink:0; }
+    .social-links { display:flex; gap:10px; }
+    .social-links a { width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; transition:background .2s; }
+    .social-links a:hover { background:#444; }
+    nav { position:sticky; top:0; z-index:1000; background:#fff; box-shadow:0 2px 20px rgba(0,0,0,0.08); }
+    .nav-inner { max-width:1200px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:72px; }
+    .logo { display:flex; align-items:center; text-decoration:none; }
+    .nav-menu { display:flex; align-items:center; list-style:none; gap:4px; }
+    .nav-menu > li { position:relative; }
+    .nav-menu > li > a { display:flex; align-items:center; gap:4px; padding:10px 14px; font-size:15px; font-weight:500; color:var(--text); text-decoration:none; border-radius:6px; transition:all .2s; }
+    .nav-menu > li > a:hover,.nav-menu > li > a.active { color:#111; background:rgba(0,0,0,0.05); }
+    .nav-menu > li > a .chevron { width:14px; height:14px; transition:transform .25s; flex-shrink:0; }
+    .nav-menu > li:hover > a .chevron { transform:rotate(180deg); }
+    .dropdown { position:absolute; top:calc(100% + 10px); left:0; background:#fff; border-radius:10px; box-shadow:0 10px 40px rgba(0,0,0,0.12); min-width:240px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all .25s ease; padding:8px 0; border-top:3px solid #111; }
+    .nav-menu > li:hover .dropdown { opacity:1; visibility:visible; transform:translateY(0); }
+    .dropdown li { list-style:none; }
+    .dropdown li a { display:flex; align-items:center; gap:10px; padding:11px 20px; font-size:14px; color:var(--text); text-decoration:none; transition:all .2s; }
+    .dropdown li a:hover { background:rgba(0,0,0,0.04); color:#111; padding-left:26px; }
+    .dd-icon { width:28px; height:28px; background:rgba(0,0,0,0.07); border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .dd-icon svg { width:15px; height:15px; fill:#111; }
+    .nav-cta { background:#111 !important; color:#fff !important; padding:10px 22px !important; border-radius:6px !important; font-weight:600 !important; transition:background .2s !important; }
+    .nav-cta:hover { background:#333 !important; }
+    .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+    .hamburger span { display:block; width:24px; height:2px; background:#111; border-radius:2px; }
+    .mobile-menu { display:none; flex-direction:column; background:#fff; max-height:0; overflow:hidden; transition:max-height .4s ease; }
+    .mobile-menu.open { max-height:700px; }
+    .mobile-menu a { display:block; padding:13px 24px; font-size:15px; color:var(--text); text-decoration:none; border-bottom:1px solid #eee; font-weight:500; }
+    .mobile-menu a:hover { color:#111; background:rgba(0,0,0,0.03); }
+    .mobile-sub { padding-left:40px !important; font-size:14px !important; color:#666 !important; }
+    /* Page hero banner */
+    .page-hero { background:linear-gradient(135deg,#0a0a0a,#222); padding:80px 0 60px; position:relative; overflow:hidden; }
+    .page-hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E"); }
+    .page-hero-inner { max-width:1200px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-size:13px; color:rgba(255,255,255,0.5); margin-bottom:16px; }
+    .breadcrumb a { color:rgba(255,255,255,0.5); text-decoration:none; }
+    .breadcrumb a:hover { color:#fff; }
+    .breadcrumb span { color:rgba(255,255,255,0.3); }
+    .page-hero h1 { font-size:clamp(32px,5vw,52px); font-weight:800; color:#fff; line-height:1.15; margin-bottom:16px; }
+    .page-hero p { font-size:17px; color:rgba(255,255,255,0.7); max-width:560px; line-height:1.7; }
+    /* Content sections */
+    section { padding:80px 0; }
+    .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+    .section-label { display:inline-flex; align-items:center; background:rgba(0,0,0,0.07); color:#111; font-size:13px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; padding:5px 14px; border-radius:30px; margin-bottom:16px; }
+    .section-title { font-size:clamp(26px,4vw,38px); font-weight:800; color:#111; line-height:1.2; margin-bottom:16px; }
+    .section-title span { color:#555; }
+    .section-desc { font-size:16px; color:#666; line-height:1.7; max-width:620px; }
+    /* Cards */
+    .cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    .card { background:#fff; border:1px solid #ddd; border-radius:14px; padding:32px 26px; transition:all .3s; position:relative; overflow:hidden; }
+    .card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:#111; transform:scaleX(0); transition:transform .3s; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,0.09); border-color:#111; }
+    .card:hover::before { transform:scaleX(1); }
+    .card-icon { width:56px; height:56px; background:rgba(0,0,0,0.07); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; transition:background .3s; }
+    .card:hover .card-icon { background:#111; }
+    .card-icon svg { width:26px; height:26px; fill:#111; transition:fill .3s; }
+    .card:hover .card-icon svg { fill:#fff; }
+    .card h3 { font-size:18px; font-weight:700; color:#111; margin-bottom:10px; }
+    .card p { font-size:14px; color:#666; line-height:1.7; }
+    /* Two-col layout */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .visual-block { background:linear-gradient(135deg,#111,#333); border-radius:16px; padding:48px 36px; color:#fff; position:relative; overflow:hidden; }
+    .visual-block::before { content:''; position:absolute; width:260px; height:260px; background:rgba(255,255,255,0.04); border-radius:50%; top:-60px; right:-60px; }
+    .visual-block h3 { font-size:22px; font-weight:700; margin-bottom:14px; position:relative; z-index:1; }
+    .visual-block p { font-size:14px; opacity:.8; line-height:1.7; position:relative; z-index:1; margin-bottom:24px; }
+    .feature-list { display:flex; flex-direction:column; gap:12px; position:relative; z-index:1; }
+    .feature-item { display:flex; align-items:center; gap:10px; font-size:14px; }
+    .feature-item::before { content:'✓'; width:20px; height:20px; background:rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+    /* Check list */
+    .check-list { display:flex; flex-direction:column; gap:14px; margin-top:24px; }
+    .check-item { display:flex; align-items:flex-start; gap:12px; font-size:15px; color:#333; }
+    .check-dot { width:22px; height:22px; flex-shrink:0; background:rgba(0,0,0,0.08); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .check-dot svg { width:12px; height:12px; fill:#111; }
+    /* Process steps */
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+    .step { text-align:center; padding:32px 20px; border:1px solid #ddd; border-radius:14px; transition:all .3s; }
+    .step:hover { border-color:#111; transform:translateY(-4px); box-shadow:0 10px 28px rgba(0,0,0,0.08); }
+    .step-num { width:48px; height:48px; background:#111; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; margin:0 auto 16px; }
+    .step h4 { font-size:15px; font-weight:700; color:#111; margin-bottom:8px; }
+    .step p { font-size:13px; color:#666; line-height:1.6; }
+    /* CTA strip */
+    .cta-strip { background:#111; padding:72px 0; text-align:center; }
+    .cta-strip h2 { font-size:clamp(26px,4vw,38px); font-weight:800; color:#fff; margin-bottom:14px; }
+    .cta-strip p { font-size:16px; color:rgba(255,255,255,0.7); margin-bottom:32px; }
+    .btn-white { background:#fff; color:#111; padding:14px 32px; border-radius:6px; font-size:15px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all .25s; border:2px solid #fff; }
+    .btn-white:hover { background:#e8e8e8; transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+    .btn-outline-white { background:transparent; color:#fff; padding:14px 32px; border-radius:6px; font-size:15px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:2px solid rgba(255,255,255,0.4); transition:all .25s; margin-left:16px; }
+    .btn-outline-white:hover { border-color:#fff; background:rgba(255,255,255,0.1); }
+    /* Alt bg */
+    .alt-bg { background:#f5f5f5; }
+    /* Team cards */
+    .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+    .team-card { text-align:center; border:1px solid #ddd; border-radius:14px; overflow:hidden; transition:all .3s; }
+    .team-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,0.1); border-color:#111; }
+    .team-avatar { height:200px; background:linear-gradient(135deg,#111,#444); display:flex; align-items:center; justify-content:center; }
+    .team-avatar svg { width:70px; height:70px; fill:rgba(255,255,255,0.3); }
+    .team-info { padding:20px; }
+    .team-info h4 { font-size:16px; font-weight:700; color:#111; margin-bottom:4px; }
+    .team-info p { font-size:13px; color:#666; }
+    /* Values */
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .value-card { padding:32px 24px; border-radius:14px; background:#fff; border:1px solid #ddd; text-align:center; transition:all .3s; }
+    .value-card:hover { border-color:#111; transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,0.08); }
+    .value-num { font-size:40px; font-weight:800; color:#ddd; margin-bottom:12px; }
+    .value-card h3 { font-size:17px; font-weight:700; color:#111; margin-bottom:10px; }
+    .value-card p { font-size:14px; color:#666; line-height:1.6; }
+    /* Footer */
+    footer { background:#050f2e; color:rgba(255,255,255,0.7); padding:72px 0 0; }
+    .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+    .footer-brand p { font-size:14px; line-height:1.8; margin-top:16px; color:rgba(255,255,255,0.6); }
+    .footer-social { display:flex; gap:10px; margin-top:20px; }
+    .footer-social a { width:36px; height:36px; background:rgba(255,255,255,0.08); border-radius:8px; display:flex; align-items:center; justify-content:center; transition:background .2s; text-decoration:none; }
+    .footer-social a:hover { background:#444; }
+    .footer-social svg { width:16px; height:16px; fill:#fff; }
+    .footer-col h4 { font-size:15px; font-weight:700; color:#fff; margin-bottom:20px; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:12px; }
+    .footer-col ul li a { font-size:14px; color:rgba(255,255,255,0.6); text-decoration:none; transition:color .2s; display:flex; align-items:center; gap:6px; }
+    .footer-col ul li a::before { content:'›'; color:#aaa; font-size:16px; }
+    .footer-col ul li a:hover { color:#fff; }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding:24px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; font-size:13px; }
+    .footer-bottom a { color:#aaa; text-decoration:none; }
+    @media(max-width:1024px) { .cards-grid { grid-template-columns:repeat(2,1fr); } .steps { grid-template-columns:repeat(2,1fr); } .team-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:768px) { .topbar-left { display:none; } .nav-menu { display:none; } .hamburger { display:flex; } .mobile-menu { display:flex; } .two-col { grid-template-columns:1fr; } .cards-grid { grid-template-columns:1fr; } .steps { grid-template-columns:1fr 1fr; } .team-grid { grid-template-columns:1fr 1fr; } .values-grid { grid-template-columns:1fr; } .footer-grid { grid-template-columns:1fr 1fr; } }
+    @media(max-width:480px) { .steps { grid-template-columns:1fr; } .team-grid { grid-template-columns:1fr; } .footer-grid { grid-template-columns:1fr; } .btn-outline-white { margin-left:0; margin-top:12px; } }
+</style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <div class="topbar-item">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="mailto:Info@vertexpoint.org">Info@vertexpoint.org</a>
+        </div>
+        <div class="topbar-item">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <a href="tel:+918105002345">+91 8105002345</a>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="social-links">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#fff"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-inner">
+      <a class="logo" href="index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="180" height="45">
+          <g transform="translate(48,40) scale(0.42)">
+            <polygon fill="#111111" points="102.69756,77.17041 124.99998,77.17041 63.1392,-29.97693 45.19286,1.10681 -0.0002,-77.17041 -45.19334,1.10681 -63.13921,-29.97693 -124.99998,77.17041 -102.69753,77.17041 -102.69753,72.12573 -116.26201,72.12573 -63.13921,-19.88586 -48.10616,6.15137 -89.10826,77.17041 -54.07253,77.17041 -54.07253,72.12573 -80.37025,72.12573 -45.19334,11.19702 -10.01595,72.12573 -36.31413,72.12573 -36.31413,77.17041 -1.2784,77.17041 -42.2805,6.15137 -0.0002,-67.0802 42.28105,6.15234 1.27745,77.17041 36.31419,77.17041 36.31419,72.12573 10.01598,72.12573 45.19286,11.19702 80.3698,72.12573 54.07256,72.12573 54.07256,77.17041 89.10924,77.17041 48.1057,6.15137 63.1392,-19.88586 116.26152,72.12573 102.69756,72.12573"/>
+          </g>
+          <text x="100" y="50" font-family="'Outfit','Segoe UI',system-ui,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="0.5" fill="#111111">Vertex Point</text>
+        </svg>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" >Home</a></li>
+        <li>
+          <a href="about.html" >About <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <ul class="dropdown">
+            <li><a href="about.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></span>Who We Are</a></li>
+            <li><a href="mission.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>Our Mission & Vision</a></li>
+            <li><a href="team.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>Our Team</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="service-software.html" class="active">Services <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <ul class="dropdown">
+            <li><a href="service-software.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2z"/></svg></span>Custom Software Development</a></li>
+            <li><a href="service-cybersecurity.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></span>Cyber Security</a></li>
+            <li><a href="service-cloud.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg></span>Cloud & DevOps Solutions</a></li>
+            <li><a href="service-consulting.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg></span>IT Consulting</a></li>
+            <li><a href="service-transformation.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Digital Transformation</a></li>
+            <li><a href="service-managed.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2z"/></svg></span>Managed IT Services</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="solution-enterprise.html" >Solutions <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <ul class="dropdown">
+            <li><a href="solution-enterprise.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></span>Enterprise Software</a></li>
+            <li><a href="solution-analytics.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg></span>Business Analytics</a></li>
+            <li><a href="solution-ecommerce.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17.2 7.2 17.2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.46 4H5.21l-.94-2H1z"/></svg></span>E-Commerce Solutions</a></li>
+            <li><a href="solution-security.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></span>Security Solutions</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="about.html" class="mobile-sub">— Who We Are</a>
+      <a href="mission.html" class="mobile-sub">— Our Mission &amp; Vision</a>
+      <a href="team.html" class="mobile-sub">— Our Team</a>
+      <a href="service-software.html">Services</a>
+      <a href="service-software.html" class="mobile-sub">— Custom Software Development</a>
+      <a href="service-cybersecurity.html" class="mobile-sub">— Cyber Security</a>
+      <a href="service-cloud.html" class="mobile-sub">— Cloud &amp; DevOps</a>
+      <a href="service-consulting.html" class="mobile-sub">— IT Consulting</a>
+      <a href="service-transformation.html" class="mobile-sub">— Digital Transformation</a>
+      <a href="service-managed.html" class="mobile-sub">— Managed IT Services</a>
+      <a href="solution-enterprise.html">Solutions</a>
+      <a href="solution-enterprise.html" class="mobile-sub">— Enterprise Software</a>
+      <a href="solution-analytics.html" class="mobile-sub">— Business Analytics</a>
+      <a href="solution-ecommerce.html" class="mobile-sub">— E-Commerce Solutions</a>
+      <a href="solution-security.html" class="mobile-sub">— Security Solutions</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#contact">Get a Quote</a>
+    </div>
+  </nav>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:rgba(255,255,255,0.8)">Services › Digital Transformation</span></div>
+    <h1>Digital Transformation</h1>
+    <p>Evolve your business for the digital age — modernise systems, automate processes, and create competitive advantage through technology.</p>
+  </div>
+</div>
+
+  <section>
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <div class="section-label">Transform Your Business</div>
+          <h2 class="section-title">From Legacy to <span>Leading Edge</span></h2>
+          <p class="section-desc" style="margin-bottom:24px">Digital transformation is not a one-off project — it's a continuous journey. We partner with you at every stage, from legacy modernisation to AI integration and beyond.</p>
+          <div class="check-list">
+            <div class="check-item"><span class="check-dot"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Legacy system modernisation and re-platforming</div>
+            <div class="check-item"><span class="check-dot"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Business process automation (BPA / RPA)</div>
+            <div class="check-item"><span class="check-dot"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>AI and machine learning integration</div>
+            <div class="check-item"><span class="check-dot"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Data strategy and analytics platform build</div>
+            <div class="check-item"><span class="check-dot"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>Change management and team enablement</div>
+          </div>
+        </div>
+        <div class="visual-block">
+          <h3>The Transformation Outcome</h3>
+          <p>Businesses that partner with us for digital transformation see measurable results within the first 90 days.</p>
+          <div class="feature-list">
+            <div class="feature-item">40–60% reduction in manual processes</div>
+            <div class="feature-item">Faster time-to-market for new features</div>
+            <div class="feature-item">Improved data visibility and decision-making</div>
+            <div class="feature-item">Reduced IT operational costs</div>
+            <div class="feature-item">Improved customer and employee experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="alt-bg">
+    <div class="container">
+      <div class="section-header" style="text-align:center;margin-bottom:48px"><div class="section-label">Our Framework</div><h2 class="section-title">The Vertex Transformation Framework</h2></div>
+      <div class="steps"><div class="step"><div class="step-num">01</div><h4>Discover</h4><p>Map your current state — people, processes, systems — and identify the highest-impact transformation opportunities.</p></div><div class="step"><div class="step-num">02</div><h4>Design</h4><p>Build a phased transformation roadmap with quick wins in phase one and structural change in later phases.</p></div><div class="step"><div class="step-num">03</div><h4>Execute</h4><p>Implement change iteratively, with constant feedback loops and clear metrics to track impact.</p></div><div class="step"><div class="step-num">04</div><h4>Embed</h4><p>Train your team, document new processes, and establish governance so transformation becomes the new normal.</p></div></div>
+    </div>
+  </section>
+  <div class="cta-strip"><div class="container">
+    <h2>Start Your Transformation</h2><p>The best time to modernise your business was yesterday. The second best time is now.</p>
+    <a href="index.html#contact" class="btn-white">Get a Free Consultation</a>
+    <a href="index.html#contact" class="btn-outline-white">Contact Us</a>
+  </div></div>
+  
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="180" height="45">
+            <g transform="translate(48,40) scale(0.42)">
+              <polygon fill="#4d94ff" points="102.69756,77.17041 124.99998,77.17041 63.1392,-29.97693 45.19286,1.10681 -0.0002,-77.17041 -45.19334,1.10681 -63.13921,-29.97693 -124.99998,77.17041 -102.69753,77.17041 -102.69753,72.12573 -116.26201,72.12573 -63.13921,-19.88586 -48.10616,6.15137 -89.10826,77.17041 -54.07253,77.17041 -54.07253,72.12573 -80.37025,72.12573 -45.19334,11.19702 -10.01595,72.12573 -36.31413,72.12573 -36.31413,77.17041 -1.2784,77.17041 -42.2805,6.15137 -0.0002,-67.0802 42.28105,6.15234 1.27745,77.17041 36.31419,77.17041 36.31419,72.12573 10.01598,72.12573 45.19286,11.19702 80.3698,72.12573 54.07256,72.12573 54.07256,77.17041 89.10924,77.17041 48.1057,6.15137 63.1392,-19.88586 116.26152,72.12573 102.69756,72.12573"/>
+            </g>
+            <text x="100" y="50" font-family="'Outfit','Segoe UI',system-ui,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="0.5" fill="#ffffff">Vertex Point</text>
+          </svg>
+          <p>A forward-thinking software development and IT services company committed to helping businesses achieve digital excellence.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="service-software.html">Software Development</a></li>
+            <li><a href="service-cybersecurity.html">Cyber Security</a></li>
+            <li><a href="service-cloud.html">Cloud &amp; DevOps</a></li>
+            <li><a href="service-consulting.html">IT Consulting</a></li>
+            <li><a href="service-transformation.html">Digital Transformation</a></li>
+            <li><a href="service-managed.html">Managed IT Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="mission.html">Mission &amp; Vision</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:Info@vertexpoint.org">Info@vertexpoint.org</a></li>
+            <li><a href="mailto:hr@vertexpoint.org">hr@vertexpoint.org</a></li>
+            <li><a href="tel:+918105002345">+91 8105002345</a></li>
+            <li><a href="#">Bengaluru, Karnataka 560068</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Vertex Point. All rights reserved.</p>
+        <div style="display:flex;gap:20px"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger) hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (nav) nav.style.boxShadow = window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,0.12)' : '0 2px 20px rgba(0,0,0,0.08)';
+  });
+</script>
+</body>
+</html>
